@@ -15,7 +15,7 @@ root.title("A/B calculator")
 lblTitle = tk.Label(text = 'A/B calculator', font = ('Helvetica', 16, 'bold'), fg = '#0000cc')
 lblTitle.place(x=70, y=20)
 
-# Adding a control group header label 
+# Adding a Control group header label 
 lblTitle = tk.Label(text = 'Control group', font = ('Helvetica', 12, 'bold'), fg = '#0000cc')
 lblTitle.place(x=25, y=55)
 
@@ -26,12 +26,28 @@ lblVisit1.place(x=25, y=85)
 entVisit1 = tk.Entry(font = ('Helvetica', 10, 'bold'))
 entVisit1.place(x=115, y=85, width=90, height=20)
 
-lblConvers = tk.Label(text = 'Conversion', font = ('Helvetica', 10, 'bold'))
-lblConvers.place(x=25, y=115)
+lblConvers1 = tk.Label(text = 'Conversion', font = ('Helvetica', 10, 'bold'))
+lblConvers1.place(x=25, y=115)
 
-entConvers = tk.Entry(font = ('Helvetica', 10, 'bold'))
-entConvers.place(x=115, y=115, width=90, height=20)
+entConvers1 = tk.Entry(font = ('Helvetica', 10, 'bold'))
+entConvers1.place(x=115, y=115, width=90, height=20)
 
+# Adding a Test group header label 
+lblTitle = tk.Label(text = 'Test group', font = ('Helvetica', 12, 'bold'), fg = '#0000cc')
+lblTitle.place(x=25, y=145)
+
+# Adding Test Group input fields
+lblVisit2 = tk.Label(text = 'Visitors', font = ('Helvetica', 10, 'bold'))
+lblVisit2.place(x=25, y=170)
+
+entVisit2 = tk.Entry(font = ('Helvetica', 10, 'bold'))
+entVisit2.place(x=115, y=170, width=90, height=20)
+
+lblConvers2 = tk.Label(text = 'Conversion', font = ('Helvetica', 10, 'bold'))
+lblConvers2.place(x=25, y=200)
+
+entConvers2 = tk.Entry(font = ('Helvetica', 10, 'bold'))
+entConvers2.place(x=115, y=200, width=90, height=20)
 
 # Adding the Calculate button
 btnProcess = tk.Button(root, text = 'Calculation', font = ('Helvetica', 10, 'bold'))
