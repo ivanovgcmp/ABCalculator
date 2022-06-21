@@ -6,6 +6,15 @@ import tkinter as tk
 def do_Close():
 	root.destroy()
 
+def popup_window():
+	window = tk.Toplevel()
+	window.geometry("280x300")
+	window.title("A/B result")
+	
+	# Adding button Close window
+	btnClosePopup = tk.Button(root, text="Close", font = ('Helvetica', 10, 'bold'), command=window.destroy)
+	btnClosePopup.place(x=160, y=250, width=90, height=30)
+
 # Creating main window
 root = tk.Tk()
 root.geometry("280x300")
@@ -50,7 +59,7 @@ entConvers2 = tk.Entry(font = ('Helvetica', 10, 'bold'))
 entConvers2.place(x=115, y=200, width=90, height=20)
 
 # Adding the Calculate button
-btnProcess = tk.Button(root, text = 'Calculation', font = ('Helvetica', 10, 'bold'))
+btnProcess = tk.Button(root, text = 'Calculation', font = ('Helvetica', 10, 'bold'), command=popup_window)
 btnProcess.place(x=25, y=250, width=90, height=30)
 
 
