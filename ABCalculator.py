@@ -12,7 +12,7 @@ def popup_window():
 	window.title("A/B result")
 	
 	# Adding button Close window
-	btnClosePopup = tk.Button(root, text="Close", font = ('Helvetica', 10, 'bold'), command=window.destroy)
+	btnClosePopup = tk.Button(window, text="Close", font = ('Helvetica', 10, 'bold'), command=window.destroy)
 	btnClosePopup.place(x=160, y=250, width=90, height=30)
 
 # Creating main window
