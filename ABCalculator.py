@@ -1,31 +1,38 @@
 # A/B calculator
 
 import tkinter as tk
+from tkinter import messagebox as mb
 
 # Creating function close program
 def do_Close():
-	root.destroy()
+    root.destroy()
 
 def do_processing():
-	# Reading data from input fields
-	n1 = int(entVisit1.get())
-	c1 = int(entConvers1.get())
-	n2 = int(entVisit2.get())
-	c2 = int(entConvers2.get())
-	
-	popup_window(n1, c1, n2, c2)
+    # Reading data from input fields
+    n1 = int(entVisit1.get())
+    c1 = int(entConvers1.get())
+    n2 = int(entVisit2.get())
+    c2 = int(entConvers2.get())
+    
+    # Checking data from input fields
+    if n1<=0 or n2<=0:
+        mb.showerror(title='Error when dividing zero', message='Incorrect number of visitors')
+        return
+    
+    # Opening the Results window
+    popup_window(n1, c1, n2, c2)
 
 def popup_window(n1, c1, n2, c2):
-	window = tk.Toplevel()
-	window.geometry("280x300")
-	window.title("A/B result")
-	
-	# Adding button Close window
-	btnClosePopup = tk.Button(window, text="Close", font = ('Helvetica', 10, 'bold'), command=window.destroy)
-	btnClosePopup.place(x=160, y=250, width=90, height=30)
-	
-	# Focus to the created window 
-	window.focus_force()
+    window = tk.Toplevel()
+    window.geometry("280x300")
+    window.title("A/B result")
+    
+    # Adding button Close window
+    btnClosePopup = tk.Button(window, text="Close", font = ('Helvetica', 10, 'bold'), command=window.destroy)
+    btnClosePopup.place(x=160, y=250, width=90, height=30)
+    
+    # Focus to the created window 
+    window.focus_force()
 
 # Creating main window
 root = tk.Tk()
