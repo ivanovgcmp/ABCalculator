@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import messagebox as mb
 import os
 import math
+from scipy.stats import norm
 
 # Creating function close program
 def do_Close():
@@ -72,38 +73,74 @@ def popup_window(n1, c1, n2, c2):
     if upper2_95 > 1:
         upper2_95 = 1
 
-    txtOutput.insert(tk.END, '95% Possible spread      ' + os.linesep)
-    txtOutput.insert(tk.END, '               from   '        + num_percent(lower1_95)
+    txtOutput.insert(tk.END, '95% Possible dispersion      ' + os.linesep)
+    txtOutput.insert(tk.END, '                   from   '        + num_percent(lower1_95)
         + '     ' + num_percent(lower2_95) + os.linesep)
-    txtOutput.insert(tk.END, '                 to   '        + num_percent(upper1_95)
+    txtOutput.insert(tk.END, '                     to   '        + num_percent(upper1_95)
         + '     ' + num_percent(upper2_95) + os.linesep)
     txtOutput.insert(tk.END, '------------------------------------------------------' + os.linesep)
 
     z2 = 2.575
-    lower1_99 = p1-z1*sigma1
+    lower1_99 = p1-z2*sigma1
     if lower1_99 < 0:
         lower1_99 = 0
-    upper1_99 = p1+z1*sigma1
+    upper1_99 = p1+z2*sigma1
 
     if upper1_99 > 1:
         upper1_99 = 1
-    lower2_99 = p2-z1*sigma2
 
+    lower2_99 = p2-z2*sigma2
     if lower2_99 < 0:
         lower2_99 = 0
-    upper2_99 = p2+z1*sigma2
+    upper2_99 = p2+z2*sigma2
 
     if upper2_99 > 1:
         upper2_99 = 1
 
-    txtOutput.insert(tk.END, '99% Possible spread      ' + os.linesep)
-    txtOutput.insert(tk.END, '               from   ' + num_percent(lower1_99)
+    txtOutput.insert(tk.END, '99% Possible dispersion      ' + os.linesep)
+    txtOutput.insert(tk.END, '                   from   ' + num_percent(lower1_99)
         + '     ' + num_percent(lower2_99) + os.linesep)
-    txtOutput.insert(tk.END, '                 to   ' + num_percent(upper1_99)
+    txtOutput.insert(tk.END, '                     to   ' + num_percent(upper1_99)
         + '     ' + num_percent(upper2_99) + os.linesep)
     txtOutput.insert(tk.END, '------------------------------------------------------' + os.linesep)
 
-    # Adding button Close window
+    # Calculation value Z & P
+    z_score = (p2-p1)/math.sqrt(sigma1*sigma1+sigma2*sigma2)
+    txtOutput.insert(tk.END, 'Z = ' + "{:.7f}".format(z_score) + os.linesep)
+
+    p_value = norm.sf(x=z_score, loc=0, scale=1)
+    txtOutput.insert(tk.END, 'P = ' + "{:.7f}".format(p_value) + os.linesep)
+
+    # Adding estimation results
+    confidence_95 = False
+    if p_value < 0.025 or p_value > 0.975:
+        confidence_95 = True
+
+    confidence_99 = False
+    if p_value < 0.005 or p_value > 0.995:
+        confidence_99 = True
+
+    lblComment95 = tk.Label(window, text = "95% confidence: ", font = ('Helvetica', 10, 'bold'))
+    lblComment95.place(x=25, y=25)
+
+    if confidence_95:
+        lblResult95 = tk.Label(window, text = 'Yes', font = ('Helvetica', 12, 'bold'), fg = '#008800')
+        lblResult95.place(x=160, y=25)
+    else:
+        lblResult95 = tk.Label(window, text = 'No', font = ('Helvetica', 12, 'bold'), fg = '#ff0000')
+        lblResult95.place(x=160, y=25)
+
+    lblComment99 = tk.Label(window, text = "99% confidence: ", font = ('Helvetica', 10, 'bold'))
+    lblComment99.place(x=25, y=65)
+
+    if confidence_99:
+        lblResult99 = tk.Label(window, text = 'Yes', font = ('Helvetica', 12, 'bold'), fg = '#008800')
+        lblResult99.place(x=160, y=65)
+    else:
+        lblResult99 = tk.Label(window, text = 'No', font = ('Helvetica', 12, 'bold'), fg = '#ff0000')
+        lblResult99.place(x=160, y=65)
+
+    # Adding button close window
     btnClosePopup = tk.Button(window, text="Close", font = ('Helvetica', 10, 'bold'), command=window.destroy)
     btnClosePopup.place(x=200, y=450, width=90, height=30)
 
